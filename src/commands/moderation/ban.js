@@ -5,7 +5,7 @@ module.exports = {
     description: 'ban a heathen',
     // devOnly: Boolean,
     // testOnly: Boolean,
-    // deleted: Boolean
+    deleted: true,
     option: [
         {
             name: 'target-user',
