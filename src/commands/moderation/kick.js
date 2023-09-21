@@ -21,7 +21,7 @@ module.exports = {
         }
 
         if (targetUser.id === interaction.guild.ownerId) {
-            await interaction.editReply("You can't ban that user because they're the server owner.");
+            await interaction.editReply("You can't kick that user because they're the server owner.");
             return;
         }
 
@@ -30,36 +30,36 @@ module.exports = {
         const botRolePosition = interaction.guild.members.me.roles.highest.position; // bots highest role
 
         if (targetUserRolePosition >= requestUserPosition) {
-            await interaction.editReply("You are unable to ban this user as you lack the authority.")
+            await interaction.editReply("You are unable to kick this user as you lack the authority.")
             return;
         }
 
         if (targetUserRolePosition >= botRolePosition) {
-            await interaction.editReply("I am unable to ban this user as I lack the power for it.")
+            await interaction.editReply("I am unable to kick this user as I lack the power for it.")
             return;
         }
 
-        // ban the target user
+        // kick the target user
         try {
-            await targetUser.ban({ reason })
-            await interaction.editReply(`User ${targetUser} has been slain. \nReason: ${reason}`)
+            await targetUser.kick({ reason })
+            await interaction.editReply(`User ${targetUser} has been kicked. \nReason: ${reason}`)
         } catch (error) {
             console.log(error)
         }
     },
     
-    name: 'ban',
-    description: 'Bans a member from this server.',
+    name: 'kick',
+    description: 'kicks a member from this server.',
     options: [
         {
             name: 'target-user',
-            description: 'The user you want to ban.',
+            description: 'The user you want to kick.',
             type: ApplicationCommandOptionType.Mentionable,
             required: true,
         },
         {
             name: 'reason',
-            description: 'The reason you want to ban',
+            description: 'The reason you want to kick',
             type: ApplicationCommandOptionType.String,
         },
         
